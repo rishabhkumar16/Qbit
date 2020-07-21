@@ -1,0 +1,141 @@
+{% extends 'base.html' %}
+{% block name %}BLOGS{% endblock %}
+{% block title %} Blog {% endblock title %}
+{% block js %}
+<script>
+  let previews = document.getElementsByClassName('preview');
+  Array.from(previews).forEach((element) => {
+    element.innerHTML = element.innerText;
+  })
+</script>
+
+{% endblock js %}
+{% block blogactive %}active {% endblock blogactive %}
+{% block body %}
+<div class="container my-3">
+  <h4>Some interesting articles by Popgut.com</h4><br>
+  <!-- <hr> <div class="row row-cols-1 row-cols-md-3"> -->
+  {% for post in allPosts %}
+  {% if forloop.counter|divisibleby:2  %}
+  <div class="row border">
+    <div class="col-md-4 m-2">
+      <img src="/media/{{post.image}}" alt="" width="400" height="400" class="img-responsive rounded">
+    </div>
+    <div class="col-md-6">
+      <div class=" ml-5 mt-5">
+        <a class="" href="/blog/{{post.slug}}">
+          <h2 class="title">{{post.title}}</h2>
+        </a>
+        <h6 class="featurette-heading text-success text-monospace">Article by {{post.author}} ({{post.views}} views)
+        </h6><br>
+        <div class="card-text preview">{{post.content|safe | truncatechars:30}}</div><br>
+        <p class="blog-post-meta text-muted text-monospace">{{post.timeStamp}}</p>
+        <a href="/blog/{{post.slug}}" class="stretched-link">Continue reading</a>
+      </div>
+    </div>
+  </div><br>
+        {% else %}
+
+        <div class="row border">
+          <div class="col-md-6">
+            <div class=" ml-5 mt-5">
+              <a class="" href="/blog/{{post.slug}}">
+                <h2 class="title">{{post.title}}</h2>
+              </a>
+              <h6 class="featurette-heading text-success text-monospace">Article by {{post.author}} ({{post.views}}
+                views) </h6><br>
+              <div class="card-text preview">{{post.content|safe | truncatechars:10}}</div><br>
+              <p class="blog-post-meta text-muted text-monospace">{{post.timeStamp}}</p>
+              <a href="/blog/{{post.slug}}" class="stretched-link">Continue reading</a>
+
+            </div>
+          </div>
+          <div class="col-md-4 m-2">
+            <img src="/media/{{post.image}}" alt="" width="400" height="400" class="img-responsive rounded">
+          </div>
+
+        </div><br>
+        {% endif %}
+
+      
+  
+
+
+
+
+  <!-- <div class="col mb-4">
+            <div class="card">
+              <img src="/media/{{post.image}}" width="500" height="250"  class="card-img-top" alt="..."><hr>
+              <div class="card-body">
+                <a class="text-decoration-none" href="/blog/{{post.slug}}"><h4 class="card-title text-dark  ">{{post.title}}</h4></a>
+                <h6 class="featurette-heading text-success text-monospace">Article by {{post.author}} ({{post.views}} views) </h6><br>
+                <div class="card-text preview">{{post.content|safe | truncatechars:10}}</div><br>
+                <p class="blog-post-meta text-muted text-monospace">{{post.timeStamp}}</p>
+                <a href="/blog/{{post.slug}}" class="stretched-link">Continue reading</a>
+              </div>
+            </div>
+          </div>
+           -->
+
+
+  <!-- {% if forloop.counter|divisibleby:2 %}
+          <div class="row featurette">
+            <div class="col-md-7">
+              <br><a href="/blog/{{post.slug}}">
+                <h2 class="text">{{post.title}}</h2>
+              </a>
+              <h5 class="featurette-heading">Article by {{post.author}} ({{post.views}} views) </h5><br>
+              <p>
+                <div class="preview">{{post.content| safe | truncatechars:10}}</div>
+              </p>
+            </div>
+            <div class="col-md-5">
+              <img class="bd-placeholder-img" width="250" height="300" src="/media/{{post.image}}" focusable="false" role="img"
+              aria-label="Placeholder: Thumbnail">
+              <rect width="100%" height="100%" fill="#55595c"></rect>
+            </div>
+          </div>
+          <hr>
+          <br>
+          {% else %}
+          
+          <div class="row featurette">
+            <div class="col-md-7 order-md-2">
+              <br><a href="/blog/{{post.slug}}">
+                <h3 class="text">{{post.title}}</h3>
+              </a>
+              <h5 class="featurette-heading">Article by {{post.author}} ({{post.views}} views) </h5><br>
+              <p>
+                <div class="preview">{{post.content| safe | truncatechars:10}}</div>
+              </p>
+            </div>
+            <div class="col-md-5 order-md-1 ">
+              <img class="bd-placeholder-img" width="250" height="300" src="/media/{{post.image}}" focusable="false" role="img"
+              aria-label="Placeholder: Thumbnail">
+              <rect width="100%" height="100%" fill="#55595c"></rect>
+            </div>
+          </div>
+          <hr>
+          
+          {% endif %} -->
+  <!-- <div class="col-md-6">
+            <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+              <div class="col p-4 d-flex flex-column position-static">
+                <strong class="d-inline-block mb-2 text-success">Article by {{post.author}} ({{post.views}} views)</strong>
+                <h3 class="mb-0">{{post.title}}</h3>
+                <div class="mb-1 text-muted">{{post.timeStamp}}</div>
+                <p class="mb-auto"><div class="preview">{{post.content| safe | truncatechars:10}}</div></p>
+                <a href="/blog/{{post.slug}}" class="stretched-link">Continue reading</a>
+              </div>
+              <div class="col-auto d-none d-lg-block">
+                <img class="bd-placeholder-img" width="250" height="300" src="{{post.image}}" 
+                focusable="false" role="img" aria-label="Placeholder: Thumbnail"><rect width="100%" height="100%" fill="#55595c"></rect>
+              </div>
+            </div>
+          </div>  -->
+  {% endfor %}
+  <hr>
+</div>
+
+
+{% endblock body %}

@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block name %}SEARCH RESULTS{% endblock %}
+
+{% block title %} Search Results {% endblock title %}
+{% block blogactive %}active {% endblock blogactive %}
+{% block body %}
+<div class="container my-3">
+<h4>Search Results:</h4><br></div>
+    {% if allPosts|length < 1 %}
+    <div class="container">
+        <p>No result found</p>
+        Your search query: <b>{{query|truncatechars:100}}</b> did not match any documents. <br>
+        Suggestions: <br>
+        <ul>
+        <li>Make sure that all words are spelled correctly</li>
+        <li>Try more general knowledge</li>
+        <li>Try fewer keywords</li>
+        <li>Try different keywords.</li>
+        </ul>
+
+    </div>
+    {% endif %}
+    {% for post in allPosts %}
+    <div class="container">
+            <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                <div class="col p-4 d-flex flex-column position-static">
+                <strong class="d-inline-block mb-2 text-success">Article by {{post.author}}</strong>
+                <h3 class="mb-0">{{post.title}}</h3>
+                <div class="mb-1 text-muted">{{post.timeStamp}}</div>
+                <p class="mb-auto">{{post.content | truncatechars:100}}</p>
+                <div>
+                <a class="btn btn-primary btn-lg my-3" href="/blog/{{post.slug}}" role="button">Continue Reading</a>
+                </div>
+                </div>
+            </div>
+            </div>
+        </div>
+        {% endfor %}
+{% endblock body %}

@@ -1,0 +1,147 @@
+{% extends 'base.html' %}
+{% block name %}Welcome To Qbit !!!{% endblock %}
+{% block title %} Qbit.com {% endblock title %}
+{% block css %}
+<style>
+  .jumbotron {
+    background-color: rgba(68, 69, 64, 0);
+  }
+
+  .typing {
+    font-size: 20px;
+    margin-left: 10px;
+    position: relative;
+  }
+
+  .typing::after {
+    content: "";
+    right: -5px;
+    width: 1px;
+    height: 5%;
+    border-right: 3px solid black;
+    animation: blink 0.5s infinite ease;
+  }
+
+  .card {
+    background: linear-gradient(to right, #1e5799 0%, #3ccdbb 0%, #16c9f6 100%);
+  }
+
+  @keyframes blink {
+    0% {
+      opacity: 1;
+    }
+
+    100% {
+      opacity: 2;
+    }
+  }
+</style>
+{% endblock css %}}
+{% block js %}
+<script>
+  let previews = document.getElementsByClassName('preview');
+  Array.from(previews).forEach((element) => {
+    element.innerHTML = element.innerText;
+  })
+
+  const texts = ['Experimenting. Teaching. Exploring. Writing. Sharing. Learning. Applying. And other intellectual verb-ing', 'We smash you with the information that will make your life easier. Really. ', 'Serving Information. Simply.'];
+  let count = 0;
+  let index = 0;
+  let currenttext = '';
+  let letter = '';
+  (function type() {
+
+    if (count === texts.length) {
+      count = 0;
+    }
+    currenttext = texts[count];
+    letter = currenttext.slice(0, ++index);
+
+    document.querySelector('.typing').textContent = letter;
+    if (letter.length === currenttext.length) {
+      count++;
+      index = 0;
+    }
+    setTimeout(type, 150);
+  }())
+</script>
+
+{% endblock js %}
+{% block homeactive %}active {% endblock homeactive %}
+{% block animation %}
+<div class="">
+  <div class="jumbotron">
+    <div class="container">
+
+      <p class="typing text-dark">hi</p>
+      <hr class="">
+      <p><a class="btn btn-warning btn-lg my-2" href="/blog" role="button">Go To Blog »</a></p>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block body %}
+
+<div class="container">
+  <h4>Our Latest Blogs:</h4>
+  <hr><br>
+  <div class="row">
+    {% for post in allPosts %}
+    <!-- <article class="col-md-4 mix post guides border p-4" data-myorder="17086">
+      <div class="inner">
+        <a itemprop="url" href="/blog/{{post.slug}}"
+          title="{{post.title}}">
+          <div class="image-holder grid-middle column half"
+            style="background-image: url('https://websitelearners.com/app/uploads/2020/04/Get-ssl-for-free-1024x768.jpg');">
+            <img itemprop="image" src="media/{{post.image}}" height="300" width="400"
+              alt="Image">
+          </div>
+        </a>
+        <div class="post-body grid-middle column half">
+          <div class="category">
+            <span rel="category tag" class="category" itemprop="articleSection" href="">Guides</span>
+          </div>
+          <div class="post-date">
+            <span class="date" itemprop="datePublished">Article by {{post.author}} ({{post.views}} views)</span>
+          </div>
+          <h3 class="entry-title" itemprop="name headline">
+            <a itemprop="url" href="https://websitelearners.com/how-to-get-a-free-ssl-for-wordpress-website/"
+              title="<?php the_title_attribute(); ?>">{{post.title}}</a>
+          </h3>
+          <div class="post-meta">
+            <div class="post-info">
+              <div class="author vcard" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+                <span itemprop="name">{{post.timeStamp}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article> -->
+    <div class="col-md-6 ">
+      <div class="shadow">
+        <div class="row no-gutters rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+          <div class="col p-4 d-flex flex-column position-static card ">
+            <strong class="d-inline-block mb-2 text-success">Article by {{post.author}} ({{post.views}} views)</strong>
+            <h3 class="mb-0">{{post.title}}</h3>
+            <div class="mb-1 text-muted">{{post.timeStamp}}</div>
+            <p class="mb-auto">
+            <div class="preview">{{post.content| safe | truncatechars:10}}</div>
+            </p>
+            <a href="/blog/{{post.slug}}" class="stretched-link">Continue reading</a>
+          </div>
+          <div class="col-auto d-none d-lg-block">
+            <img class="bd-placeholder-img" width="200" height="250" src="media/{{post.image}}" focusable="false"
+              role="img" aria-label="Placeholder: Thumbnail">
+            <title>Placeholder</title>
+            <rect width="100%" height="100%" fill="#55595c"></rect>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+
+{% endblock body %}

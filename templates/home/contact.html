@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block name %}CONTACT US{% endblock %}
+{% block title %} Contact us {% endblock title %}
+{% block contactactive %}active {% endblock contactactive %}
+{% block body %}
+<div class="container">
+    <br>
+    <h4>Contact Popgut</h4>
+    <form  method="post" action="/contact">
+        {%csrf_token%}
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" name="name" id="name" aria-describedby="name">
+        </div>
+        <div class="form-group">
+            <label for="email">Email address</label>
+            <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp">
+            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        </div>
+        <div class="form-group">
+            <label for="phone">Phone No.</label>
+            <input type="phone" name="phone" class="form-control" id="phone">
+        </div>
+        <div class="form-group">
+            <label for="content">How may we help you ?</label>
+                <textarea class="form-control" name="content" id="" cols="30" rows="5"></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+
+{% endblock body %}
